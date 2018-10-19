@@ -9,7 +9,7 @@
 import UIKit
 
 
-class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MemosViewController: UIViewController {
 	
 	var memosTableView = UITableView(frame: .zero, style: .grouped)
 	var addButton = UIButton()
@@ -25,6 +25,11 @@ class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		
 		layoutTableView()
 		layoutButton()
+	}
+	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		memosTableView.reloadData()
 	}
 	
 	func layoutTableView() {
@@ -53,7 +58,11 @@ class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		addButton.layer.borderWidth = 2
 		addButton.layer.cornerRadius = 25
 		addButton.layer.masksToBounds = true
-		
+		addButton.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
+		addButton.setTitle("+", for: .normal)
+		addButton.setTitleColor(.black, for: .normal)
+		addButton.titleLabel?.font = UIFont.systemFont(ofSize: 40, weight: .light)
+		addButton.contentVerticalAlignment = .center
 		view.addSubview(addButton)
 		
 		NSLayoutConstraint.activate([
@@ -66,6 +75,19 @@ class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 			])
 		
 	}
+	
+	@objc func addButtonPressed() {
+		let vc = MemoEditViewController()
+		present(vc, animated: true, completion: nil)
+	}
+	
+
+}
+
+
+
+// TableView delegates and datasource functions
+extension MemosViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func getMemo(at indexPath: IndexPath) -> Memo {
 		
@@ -106,8 +128,13 @@ class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	
 	func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		
-		let pinAction = UIContextualAction(style: .normal, title: "Pin") { (action, view, completionHandler) in
-			
+		let memo = getMemo(at: indexPath)
+		let pinAction = UIContextualAction(style: .normal, title: memo.pinned ? "Unpin" : "Pin") { (action, view, completionHandler) in
+			memo.pinned = !memo.pinned
+			UIView.transition(with: tableView, duration: 0.3, options: .transitionCrossDissolve, animations: {
+				tableView.reloadData()
+			}, completion: nil)
+			completionHandler(false)
 		}
 		
 		return UISwipeActionsConfiguration(actions: [pinAction])
@@ -116,15 +143,30 @@ class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	
 	func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		
+		let memo = getMemo(at: indexPath)
+		
 		let editAction = UIContextualAction(style: .normal, title: "Edit") { (action, view, completionHandler) in
-			
+			let vc = MemoEditViewController()
+			vc.memo = memo
+			self.present(vc, animated: true, completion: nil)
+			completionHandler(false)
 		}
 		
 		let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completionHandler) in
-			
+			VirtualDatabase.shared.removeMemo(memo: memo)
+			completionHandler(true)
 		}
 		
-		return UISwipeActionsConfiguration(actions: [editAction, deleteAction])
+		
+		return UISwipeActionsConfiguration(actions: [deleteAction, editAction])
+	}
+	
+	
+	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		let memo = getMemo(at: indexPath)
+		let vc = MemoEditViewController()
+		vc.memo = memo
+		present(vc, animated: true, completion: nil)
 	}
 	
 	
@@ -137,9 +179,4 @@ class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	}
 	
 	
-	
-	
-
-
 }
-

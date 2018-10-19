@@ -17,6 +17,8 @@ class Memo {
 	
 	init(note: String) {
 		self.note = note
+		
+		VirtualDatabase.shared.addMemo(memo: self)
 	}
 	
 }
