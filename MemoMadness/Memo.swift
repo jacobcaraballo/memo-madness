@@ -18,6 +18,8 @@ class Memo {
 	init(note: String) {
 		self.note = note
 		
+		
+		// add this new memo to the virtual database
 		VirtualDatabase.shared.addMemo(memo: self)
 	}
 	

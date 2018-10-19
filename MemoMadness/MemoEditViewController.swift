@@ -14,7 +14,7 @@ class MemoEditViewController: UIViewController, UITextViewDelegate {
 	private let textView = UITextView()
 	var memo: Memo!
 	
-
+	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		layoutTextView()
@@ -22,10 +22,12 @@ class MemoEditViewController: UIViewController, UITextViewDelegate {
 		textView.becomeFirstResponder()
 	}
 	
+	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		textView.text = memo?.note
 	}
+	
 	
 	func layoutTextView() {
 		
@@ -45,6 +47,7 @@ class MemoEditViewController: UIViewController, UITextViewDelegate {
 		
 	}
 	
+	
 	func layoutToolbar() {
 		
 		let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 1, height: 44))
@@ -59,6 +62,7 @@ class MemoEditViewController: UIViewController, UITextViewDelegate {
 		textView.inputAccessoryView = toolbar
 		
 	}
+	
 	
 	@objc func cancel() {
 		view.endEditing(true)

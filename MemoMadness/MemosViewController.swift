@@ -11,15 +11,28 @@ import UIKit
 
 class MemosViewController: UIViewController {
 	
+	
+	// table view that will hold the list of memos
 	var memosTableView = UITableView(frame: .zero, style: .grouped)
+	
+	
+	// add button to create memos
 	var addButton = UIButton()
+	
+	
+	// fetches the unpinned memos
 	var memos: [Memo] {
 		return VirtualDatabase.shared.unpinnedMemos()
 	}
+	
+	
+	// fetches the pinned memos
 	var pins: [Memo] {
 		return VirtualDatabase.shared.pinnedMemos()
 	}
-
+	
+	
+	// our view loaded, lets layout the content
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -27,11 +40,15 @@ class MemosViewController: UIViewController {
 		layoutButton()
 	}
 	
+	
+	// reload our notes when the view appears
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
 		memosTableView.reloadData()
 	}
 	
+	
+	// layout the tableview
 	func layoutTableView() {
 		
 		memosTableView.delegate = self
@@ -51,6 +68,8 @@ class MemosViewController: UIViewController {
 		
 	}
 	
+	
+	// layout the add button
 	func layoutButton() {
 		
 		addButton.translatesAutoresizingMaskIntoConstraints = false
@@ -76,6 +95,8 @@ class MemosViewController: UIViewController {
 		
 	}
 	
+	
+	// add button was pressed, present the edit controller
 	@objc func addButtonPressed() {
 		let vc = MemoEditViewController()
 		present(vc, animated: true, completion: nil)

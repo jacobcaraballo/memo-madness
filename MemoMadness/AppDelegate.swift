@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 		
+		// get the top / bottom safe insets (for iphone x compat)
 		safeInsets.top = window!.safeAreaInsets.top
 		safeInsets.bottom = window!.safeAreaInsets.bottom
 		

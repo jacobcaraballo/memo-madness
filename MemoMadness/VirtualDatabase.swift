@@ -16,14 +16,6 @@ class VirtualDatabase {
 	static var shared = VirtualDatabase()
 	private var memos = [Memo]()
 	
-	func addMemo(memo: Memo) {
-		memos.append(memo)
-	}
-	
-	func removeMemo(memo: Memo) {
-		guard let index = memos.firstIndex(where: { $0.id == memo.id }) else { return }
-		memos.remove(at: index)
-	}
 	
 	func allMemos() -> [Memo] {
 		return memos
@@ -35,6 +27,15 @@ class VirtualDatabase {
 	
 	func unpinnedMemos() -> [Memo] {
 		return memos.filter({ !$0.pinned })
+	}
+	
+	func addMemo(memo: Memo) {
+		memos.append(memo)
+	}
+	
+	func removeMemo(memo: Memo) {
+		guard let index = memos.firstIndex(where: { $0.id == memo.id }) else { return }
+		memos.remove(at: index)
 	}
 	
 }
