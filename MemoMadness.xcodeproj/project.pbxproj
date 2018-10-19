@@ -14,6 +14,7 @@
 		16A5261F21796896006A1C23 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16A5261D21796896006A1C23 /* LaunchScreen.storyboard */; };
 		16A5262921796AFC006A1C23 /* VirtualDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5262821796AFC006A1C23 /* VirtualDatabase.swift */; };
 		16A5262B21796B0C006A1C23 /* Memo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5262A21796B0C006A1C23 /* Memo.swift */; };
+		16A5262D217972FC006A1C23 /* MemoEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16A5262C217972FC006A1C23 /* MemoEditViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		16A5262021796896006A1C23 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16A5262821796AFC006A1C23 /* VirtualDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VirtualDatabase.swift; sourceTree = "<group>"; };
 		16A5262A21796B0C006A1C23 /* Memo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Memo.swift; sourceTree = "<group>"; };
+		16A5262C217972FC006A1C23 /* MemoEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoEditViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				16A5262A21796B0C006A1C23 /* Memo.swift */,
 				16A526142179688F006A1C23 /* AppDelegate.swift */,
 				16A526162179688F006A1C23 /* MemosViewController.swift */,
+				16A5262C217972FC006A1C23 /* MemoEditViewController.swift */,
 				16A526182179688F006A1C23 /* Main.storyboard */,
 				16A5261B21796896006A1C23 /* Assets.xcassets */,
 				16A5261D21796896006A1C23 /* LaunchScreen.storyboard */,
@@ -142,6 +145,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16A526172179688F006A1C23 /* MemosViewController.swift in Sources */,
+				16A5262D217972FC006A1C23 /* MemoEditViewController.swift in Sources */,
 				16A526152179688F006A1C23 /* AppDelegate.swift in Sources */,
 				16A5262921796AFC006A1C23 /* VirtualDatabase.swift in Sources */,
 				16A5262B21796B0C006A1C23 /* Memo.swift in Sources */,
