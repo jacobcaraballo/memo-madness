@@ -67,6 +67,16 @@ class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 		
 	}
 	
+	func getMemo(at indexPath: IndexPath) -> Memo {
+		
+		if pins.count != 0 {
+			return indexPath.section == 0 ? pins[indexPath.row] : memos[indexPath.row]
+		} else {
+			return memos[indexPath.row]
+		}
+		
+	}
+	
 	func numberOfSections(in tableView: UITableView) -> Int {
 		return pins.count != 0 ? 2 : 1
 	}
@@ -82,7 +92,16 @@ class MemosViewController: UIViewController, UITableViewDelegate, UITableViewDat
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		var cell: UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: "MemoCell")
 		
+		if cell == nil {
+			cell = UITableViewCell(style: .default, reuseIdentifier: "MemoCell")
+		}
+		
+		let memo = getMemo(at: indexPath)
+		cell.textLabel?.text = memo.note
+		
+		return cell
 	}
 	
 	func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
